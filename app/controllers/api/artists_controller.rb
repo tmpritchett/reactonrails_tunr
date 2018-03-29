@@ -23,7 +23,7 @@ class Api::ArtistsController < ApplicationController
         @artist = Artist.find(params[:id])
         @artist.update!(artist_params)
 
-        render json {
+        render json: {
             artist: @artist
         }
     end
@@ -41,3 +41,4 @@ class Api::ArtistsController < ApplicationController
 
 end
 
+end
