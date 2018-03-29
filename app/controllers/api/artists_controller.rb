@@ -14,8 +14,18 @@ class Api::ArtistsController < ApplicationController
     end
 
     def create
+        @artist = Artist.create(artist_params)
+        render json: {
+            artist: @artist
+        }
     end
     def update
+        @artist = Artist.find(params[:id])
+        @artist.update!(artist_params)
+
+        render json {
+            artist: @artist
+        }
     end
     def destroy
         Artist.find(params[:id]).destroy
@@ -24,4 +34,10 @@ class Api::ArtistsController < ApplicationController
     }
     end
 
+    private
+
+    def artist_params
+        params.require(:artist).permit(:name, :photo_url, :nationality)
+
 end
+
